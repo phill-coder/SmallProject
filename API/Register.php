@@ -5,16 +5,17 @@
 	$ID = $inData["ID"];
 	$FirstName = $inData["FirstName"];
     $LastName = $inData["LastName"];
-	$UserID = $inData["UserID"];
     $PhoneNumber= $inData["PhoneNumber"];
 	$Email = $inData["Email"];
     $Username = $inData["Username"];
     $Password = $inData["Password"];
 
-	$conn = new mysqli("localhost", "root", "cop4331Team","contactmanager");
+	$conn = new mysqli("localhost", $Username , $Password,"contactmanager");
 	if ($conn) 
 	{
-		$stmt = $conn->prepare("INSERT into Contacts ID,FirstName, LastName,UserID,PhoneNumber,Email, Username, Password  VALUES(?,?,?,?,?,?,?)");
+		
+		//id is contact's number
+		$stmt = $conn->prepare("INSERT into Contacts ID,FirstName, LastName,PhoneNumber,Email, Username, Password  VALUES(?,?,?,?,?,?,?)");
 		$stmt->bind_param("ississ", $ID, $FirstName,$LastName,$UserID,$PhoneNumber,$Email,$Username, $Password    );
 		$stmt->execute();
 		$stmt->close();

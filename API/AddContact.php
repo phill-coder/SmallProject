@@ -5,23 +5,21 @@
 	$ID = $inData["ID"];
 	$FirstName = $inData["FirstName"];
     $LastName = $inData["LastName"];
-	$UserID = $inData["UserID"];
     $PhoneNumber= $inData["PhoneNumber"];
 	$Email = $inData["Email"];
-    $Username = $inData["Username"];
-    $Password = $inData["Password"];
+  
 
 	$conn = new mysqli("localhost", "root", "cop4331Team","contactmanager");
 	if ($conn) 
 	{
-		$stmt = $conn->prepare("INSERT into Contacts ID,FirstName, LastName,UserID,PhoneNumber,Email, Username, Password  VALUES(?,?,?,?,?,?,?)");
-		$stmt->bind_param("ississ", $ID, $FirstName,$LastName,$UserID,$PhoneNumber,$Email,$Username, $Password    );
+		$stmt = $conn->prepare("INSERT into Contacts (ID,FirstName, LastName,PhoneNumber,Email) VALUES(?,?,?,?,?,?)");
+		$stmt->bind_param("ississ", $ID, $FirstName,$LastName,$UserID,$PhoneNumber,$Email);
 		$stmt->execute();
 		$stmt->close();
 		$conn->close();
 
-		header('Content-type: application/json');
-		echo $obj;
+		//header('Content-type: application/json');
+		//echo $obj;
 	} 
 	else
 	{

@@ -1,0 +1,117 @@
+body
+{
+  background-color: #2F4454;
+  font-family: 'Nunito Sans', sans-serif;
+}
+
+.makeAccount
+{
+  text-align: center;
+  box-sizing: border-box;
+  width: 92%;
+  font-size: .8em;
+}
+
+.container
+{
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  height: 60%;  
+  width: 33%;
+  border: 3px solid white;
+  background-color: white;
+  text-align: left;   
+}
+
+.accountLink
+{
+  text-decoration: none;
+}
+
+#itemsInContainer
+{
+  margin-left: 8%;
+  margin-bottom: 10%; 
+} 
+
+h1
+{ 
+  font-size: 200%;
+  margin-top: 10%;
+}
+
+h2
+{
+  font-size: 100%;
+  margin-bottom:5%;
+  color: gray;
+}
+
+.input
+{
+  width: 92%;
+  box-sizing: border-box;
+  background-color: lightgray;
+  border: 2px solid lightgray;
+  border-radius: 0%;
+  font-size: 16px;
+  background-repeat: no-repeat;
+  padding: 8.5px 10px 8.5px 10px;  
+  margin-bottom: 5%;
+}
+
+#username
+{
+  margin-top:1.5%;
+  float: right; 
+  width: 84%;
+  margin-right: 8%;
+}
+
+.usernameIcon
+{
+  position:absolute;
+  width: 6%;
+  float: left;
+  margin-top:3%;
+}
+
+#password
+{
+  margin-top:1.5%;
+  float: right;
+  width: 84%;
+  margin-right: 8%;
+}
+
+.passwordIcon
+{
+  width: 6%;
+  float: left;
+  margin-top:3%;
+}
+
+#button
+{
+  text-align: center;
+  padding: 8.5px 0px 8.5px 0px;
+  background-color: #2F4454;
+  color: white;
+  border-color: #2F4454;
+}
+
+.userCredentials
+{
+  display: block;
+  font-weight: bold; 
+  color: black;
+}
+
+
+#button:hover
+{
+  border-color: black;
+  cursor: pointer;
+}

@@ -2,19 +2,21 @@
    
 	$inData = getRequestInfo();
     $id = $inData["ID"];
+	$FirstName = $inData["FirstName"];
+    $LastName = $inData["LastName"];
 
 	$conn = new mysqli("localhost", "root", "cop4331Team","contactmanager");
 	if ($conn) 
 	{
-		$stmt = $conn->prepare("DELETE FROM Contacts WHERE ?");
-		$stmt->bind_param("i", $id);
+		$stmt = $conn->prepare("DELETE FROM Contacts WHERE FirstName = ? and LastName = ?");
+		$stmt->bind_param("s", $FirstName,$LastName);
 		$stmt->execute();
 
-        if (mysqli_query($conn, $stmt)) {
-            echo "Record deleted successfully";
-          } else {
-            echo "Error deleting record: " . mysqli_error($conn);
-          }
+        // if (mysqli_query($conn, $stmt)) {
+        //     echo "Record deleted successfully";
+        //   } else {
+        //     echo "Error deleting record: " . mysqli_error($conn);
+        //   }
 
 
 		$stmt->close();

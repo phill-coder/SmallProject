@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="styleContact.css">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans&display=swap" rel="stylesheet">
+
+  <title>Document</title>
+</head>
+<body>
+  <div class="contactContainer">
+      <img src="contact-icon.png" alt="Contact Icon" class="contactIcon">
+      <button class="buttons" id="logoutButton">Logout</button>
+    <h1>Contact Manager</h1>
+  </div>
+
+  <div class="addContainer">
+    <h2>Add Contacts</h2>
+
+    <label for="name" class="addLabels">First Name</label>
+    <input type="text" class="addInput" id="addFirst">
+
+    <label for="name" class="addLabels">Last Name</label>
+    <input type="text" class="addInput" id="addLast">
+    
+    <label for="name" class="addLabels">Phone Number</label>
+    <input type="text" class="addInput" id="addPhoneNumber">
+
+    <label for="name" class="addLabels">Email</label>
+    <input type="text" class="addInput" id="addEmail">
+    
+    <button class="buttonContact">Add Contact</button>  
+  </div>
+
+  <div class="searchContainer">   
+    <input type="text" class="searchInput" id="search" placeholder="search by name, phone number, or email">
+
+    <div class="searchGrid">
+      <div class="gridItem" id="fnGrid">First Name</div>
+      <div class="gridItem" id="lnGrid">Last Name</div>
+      <div class="gridItem">Phone Number</div>
+      <div class="gridItem">Email</div>
+    </div>
+  </div> 
+
+</body>
+</html>
+

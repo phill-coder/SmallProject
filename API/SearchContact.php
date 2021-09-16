@@ -5,17 +5,18 @@
 	$ID = $inData["ID"];
 	$FirstName = $inData["FirstName"];
     $LastName = $inData["LastName"];
-	$UserID = $inData["UserID"];
     $PhoneNumber= $inData["PhoneNumber"];
 	$Email = $inData["Email"];
+	$Search = $inData["Search"];
+
 
 	$conn = new mysqli("localhost", "root", "cop4331Team","contactmanager");
 
     if($conn){
-        $stmt = $conn->prepare("select FirstName from Contact where FirstName like ? and LastName like ?");
+        $stmt = $conn->prepare("SELECT FirstName, LastName, PhoneNumber, Email FROM Contact WHERE FirstName LIKE ? and ID =?");
     
-    $ContactName = "%" . $inData["search"] . "%";
-	$stmt->bind_param("ss", $ContactName, $inData["LastName"]);
+    $ContactName = "% . $Search . %";
+	$stmt->bind_param("si", $ContactName,$ID);
 	$stmt->execute();
 		
 	$result = $stmt->get_result();
@@ -28,12 +29,15 @@
 			$searchResults .= ",";
 		}
 		$searchCount++;
-		$searchResults .= '"' . $row["FirstName"] . '"';
+		$searchResults .= $row["FirstName"]. " ";
+		$searchResults .= $row["LastName"]. " ";
+		$searchResults .= $row["PhoneNumber"]. " ";
+		$searchResults .= $row["Email"]. " ";
 	}
 	
 	if( $searchCount == 0 )
 	{
-		returnWithError( "No Records Found" );
+		//returnWithError( "No Records Found" );
 	}
 	else
 	{
@@ -52,6 +56,13 @@
 	{
 		$retValue = '{"results":[' . $searchResults . '],"error":""}';
 		sendResultInfoAsJson( $retValue );
+	}
+
+	
+	function sendResultInfoAsJson( $obj )
+	{
+		header('Content-type: application/json');
+		echo $obj;
 	}
 
 
