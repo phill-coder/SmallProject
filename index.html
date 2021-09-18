@@ -1,5 +1,3 @@
-
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -7,7 +5,7 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="styleRegister.css">
+  <link rel="stylesheet" href="style.css">
   <script type="text/javascript" src="js/code.js"></script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -19,9 +17,9 @@
 
   <div class="container">
     <div id="itemsInContainer">
-      <h1>Register</h1>
+      <h1>Login</h1>
 
-      <h2>Please choose a username and password</h2>
+      <h2>Welcome to our Contact Manager TEST</h2>
 
       <label class="userCredentials", for="username">Username</label>
       <img src="username.png", alt="Username icon", class="usernameIcon">   
@@ -31,10 +29,13 @@
       <img src="password.png", alt="Password icon", class="passwordIcon">
       <input type="text", class="input" id="Password"> 
 
-      <button class="input", id="button" onclick="doRegister();">Sign Up</button>
-	<span id="addRegister"></span>
- 
+      <button class="input", id="button" onclick="doLogin();">Login</button>
+	<span id="loginStatus"></span>
 
+      <div class="makeAccount">
+        <label for="">Don't have an account? </label>
+        <a class="accountLink" href="url" >Register here!</a>
+      </div>
     </div>  
       <!-- End of itemsInContainer -->
   </div>
@@ -42,4 +43,3 @@
 </body>
 
 </html>
- 

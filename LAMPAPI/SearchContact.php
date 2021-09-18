@@ -3,6 +3,7 @@
 	$inData = getRequestInfo();
 	
 	$ID = $inData["ID"];
+	$UserID = $inData["UserID"];
 	$FirstName = $inData["FirstName"];
     $LastName = $inData["LastName"];
     $PhoneNumber= $inData["PhoneNumber"];
@@ -13,10 +14,10 @@
 	$conn = new mysqli("localhost", "root", "cop4331Team","contactmanager");
 
     if($conn){
-        $stmt = $conn->prepare("SELECT FirstName, LastName, PhoneNumber, Email FROM Contact WHERE FirstName LIKE ? and ID =?");
+        $stmt = $conn->prepare("SELECT FirstName, LastName, PhoneNumber, Email,UserID FROM Contacts WHERE FirstName LIKE ?");
     
-    $ContactName = "% . $Search . %";
-	$stmt->bind_param("si", $ContactName,$ID);
+    $ContactName = '%' . $Search . '%';
+	$stmt->bind_param("s", $ContactName);
 	$stmt->execute();
 		
 	$result = $stmt->get_result();
@@ -37,7 +38,7 @@
 	
 	if( $searchCount == 0 )
 	{
-		//returnWithError( "No Records Found" );
+		returnWithError( "No Records Found" );
 	}
 	else
 	{
@@ -55,6 +56,11 @@
 	function returnWithInfo( $searchResults )
 	{
 		$retValue = '{"results":[' . $searchResults . '],"error":""}';
+		sendResultInfoAsJson( $retValue );
+	}
+	function returnWithError( $err )
+	{
+		$retValue = '{"error":"' . $err . '"}';
 		sendResultInfoAsJson( $retValue );
 	}
 

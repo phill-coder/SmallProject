@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="styleContact.css">
-
+ <script type="text/javascript" src="js/code.js"></script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans&display=swap" rel="stylesheet">
@@ -14,7 +14,7 @@
 <body>
   <div class="contactContainer">
       <img src="contact-icon.png" alt="Contact Icon" class="contactIcon">
-      <button class="buttons" id="logoutButton">Logout</button>
+      <button class="buttons" id="logoutButton" onclick = "doLogout();">Logout</button>
     <h1>Contact Manager</h1>
   </div>
 
@@ -22,18 +22,19 @@
     <h2>Add Contacts</h2>
 
     <label for="name" class="addLabels">First Name</label>
-    <input type="text" class="addInput" id="addFirst">
+    <input type="text" class="addInput" id="FirstName">
 
     <label for="name" class="addLabels">Last Name</label>
-    <input type="text" class="addInput" id="addLast">
+    <input type="text" class="addInput" id="LastName">
     
     <label for="name" class="addLabels">Phone Number</label>
-    <input type="text" class="addInput" id="addPhoneNumber">
+    <input type="text" class="addInput" id="PhoneNumber">
 
     <label for="name" class="addLabels">Email</label>
-    <input type="text" class="addInput" id="addEmail">
+    <input type="text" class="addInput" id="Email">
     
-    <button class="buttonContact">Add Contact</button>  
+    <button class="buttonContact", id = "button" onclick= "addContacts();">Add Contact</button> 
+	<span id="contactResult"></span> 
   </div>
 
   <div class="searchContainer">   
