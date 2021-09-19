@@ -130,6 +130,8 @@ function addContacts(){
 	{
 		document.getElementById("contactResult").innerHTML = "broke";
 	}
+	addRow(FirstName, LastName,Email, PhoneNumber);
+
 
 }
 
@@ -163,7 +165,7 @@ function createContactList()
                				 var emailContact = jsonObject.EmailList[i];
              				 var phoneNumberContact = jsonObject.PhoneList[i];
 					 
-					 addRow(firstNameContact, lastNameContact, emailContact, phoneNumberContact);
+					 addRow(firstNameContact, lastNameContact, phoneNumberContact, emailContact);
                                   }			
 							}
 		};
@@ -190,10 +192,47 @@ function addRow(firstName, lastName, email, phoneNumber) {
 }
  
 function deleteRow(obj) {
-      
     var index = obj.parentNode.parentNode.rowIndex;
     var table = document.getElementById("myTableData");
-    table.deleteRow(index);
+	
+	
+    var firstname = table.rows[index].cells[1].innerHTML;
+    var lastname = table.rows[index].cells[2].innerHTML;
+    var phone = table.rows[index].cells[3].innerHTML;
+    var email = table.rows[index].cells[4].innerHTML;
+
+	table.deleteRow(index);
+
+		
+    var tmp = {FirstName:firstname,
+		LastName:lastname,
+		PhoneNumber:phone,
+		Email:email	};
+
+	var jsonPayload = JSON.stringify( tmp );
+	var url = urlBase + '/DeleteContact.' + extension;
+
+
+	var xhr = new XMLHttpRequest();
+	xhr.open("POST", url, true);
+	xhr.setRequestHeader("Content-type", "application/json; charset=UTF-8");
+	try
+	{
+		xhr.onreadystatechange = function() 
+		{
+
+			if (this.readyState == 4 && this.status == 200) 
+			{	
+              			}
+        
+		};
+		//window.location.href = "ContactManager.html";
+		xhr.send(jsonPayload);
+	}
+	catch(err)
+	{
+		
+	}
     
 }
 
@@ -230,7 +269,7 @@ function search()
      
                			 var rowCount = table.rows.length;
                			 var row = table.insertRow(rowCount);
-				console.log(rowCount);
+			
         
               			  
               			     for (var i = rowCount-1; i >= 0; i--)
@@ -246,7 +285,7 @@ function search()
                				 var emailContact = jsonObject.EmailList[i];
              				 var phoneNumberContact = jsonObject.PhoneList[i];
 					 
-					 addRow(firstNameContact, lastNameContact, emailContact, phoneNumberContact);
+					 addRow(firstNameContact, lastNameContact, phoneNumberContact,emailContact);
                                   }	
 				
 			}

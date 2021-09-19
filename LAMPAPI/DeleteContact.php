@@ -4,22 +4,29 @@
 
 	$FirstName = $inData["FirstName"];
    	 $LastName = $inData["LastName"];
+	$PhoneNumber= $inData["PhoneNumber"];
+	$Email = $inData["Email"];
+  
+
 
 	$conn = new mysqli("localhost", "root", "cop4331Team","contactmanager");
 	if ($conn) 
 	{
-		$stmt = $conn->prepare("DELETE FROM Contacts WHERE FirstName = ? and LastName = ?");
-		$stmt->bind_param("ss", $FirstName,$LastName);
+		$stmt = $conn->prepare("DELETE FROM Contacts WHERE FirstName = ? AND LastName = ? AND PhoneNumber = ? AND Email = ?");
+		$stmt->bind_param("ssss", $FirstName,$LastName, $PhoneNumber,$Email);
 		$stmt->execute();
 
-		returnWithError("");
+
+ 		 returnWithError("");
+
+		
 
 		$stmt->close();
 		$conn->close();
 	} 
 	else
 	{
-		echo "database failed to connect";
+		returnWithError("FAILED TO CONNECT");
 	}
 
     function sendResultInfoAsJson( $obj )
