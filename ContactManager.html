@@ -5,13 +5,13 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="css/styleContact.css">
  <script type="text/javascript" src="js/code.js"></script>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preconnect" href="https://fonts.googleapis.com/%22%3E
+  <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans&display=swap" rel="stylesheet">
 
   <title>Document</title>
 </head>
-<body>
+<body onload="createContactList()">
   <div class="contactContainer">
       <img src="contact-icon.png" alt="Contact Icon" class="contactIcon">
       <button class="buttons" id="logoutButton" onclick = "doLogout();">Logout</button>
@@ -26,19 +26,20 @@
 
     <label for="name" class="addLabels">Last Name</label>
     <input type="text" class="addInput" id="LastName">
-    
+
     <label for="name" class="addLabels">Phone Number</label>
     <input type="text" class="addInput" id="PhoneNumber">
 
     <label for="name" class="addLabels">Email</label>
     <input type="text" class="addInput" id="Email">
-    
+
     <button class="buttonContact", id = "button" onclick= "addContacts();">Add Contact</button> 
-	<span id="contactResult"></span> 
+    <span id="contactResult"></span> 
   </div>
 
   <div class="searchContainer">   
-    <input type="text" class="searchInput" id="search" placeholder="search by name, phone number, or email">
+    <input type="text" class="searchInput" id="Search" placeholder="search by name, phone number, or email">
+    <button onclick= "search()">Search</button>
 
     <div class="searchGrid">
       <div class="gridItem" id="fnGrid">First Name</div>
@@ -46,6 +47,10 @@
       <div class="gridItem">Phone Number</div>
       <div class="gridItem">Email</div>
     </div>
+
+      <table id="myTableData"  border="1" cellpadding="2"> </table>
+
+    
   </div> 
 
 </body>

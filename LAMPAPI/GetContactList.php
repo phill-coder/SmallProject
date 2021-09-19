@@ -1,35 +1,31 @@
 <?php
-   
+   $FirstNameList = "";
+ $LastNameList ="";
+     $PhoneList ="";
+     $EmailList = "";
+
+$searchCount = 0;
 	$inData = getRequestInfo();
-	$Search = $inData["Search"];
 	$UserID = $inData["UserID"];
-  	 $FirstNameList = "";
- 	$LastNameList ="";
-    	 $PhoneList ="";
-     	$EmailList = "";
-
-
 	$conn = new mysqli("localhost", "root", "cop4331Team","contactmanager");
 
     if($conn){
-        $stmt = $conn->prepare("SELECT FirstName, LastName, PhoneNumber, Email,ID FROM Contacts WHERE FirstName LIKE ? and UserID = ?");
-    
-    $ContactName = '%' . $Search . '%';
-	$stmt->bind_param("si", $ContactName,$UserID);
+        $stmt = $conn->prepare("SELECT FirstName, LastName, PhoneNumber, Email,ID FROM Contacts WHERE UserID = ?");
+	$stmt->bind_param("i",$UserID);
 	$stmt->execute();
 		
 	$result = $stmt->get_result();
+	
 
 	
 	while($row = $result->fetch_assoc())
 	{
 		if( $searchCount > 0 )
 		{
-			   $FirstNameList .=",";
-           		 $LastNameList .=",";
-           		 $PhoneList .=",";
-            		$EmailList .= ",";
-
+            $FirstNameList .=",";
+            $LastNameList .=",";
+            $PhoneList .=",";
+            $EmailList .= ",";
 		}
 		$searchCount++;
 		$FirstNameList .= '"' .$row["FirstName"].'"';
@@ -54,7 +50,7 @@
 		return json_decode(file_get_contents('php://input'), true);
 	}
 
-	function returnWithInfo( $FirstNameList, $LastNameList,$PhoneList,$EmailList  )
+	function returnWithInfo( $FirstNameList, $LastNameList,$PhoneList,$EmailList )
 	{
 		$retValue = '{
             "FirstNameList":[' . $FirstNameList . '],
@@ -62,8 +58,7 @@
             "PhoneList":[' . $PhoneList . '],
             "EmailList":[' . $EmailList . '],
             "error":""
-       			 }';
-
+        }';
 		sendResultInfoAsJson( $retValue );
 	}
 	function returnWithError( $err )

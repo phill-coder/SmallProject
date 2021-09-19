@@ -80,7 +80,7 @@ function doLogin(){
 	{
 		document.getElementById("addLogin").innerHTML = "broke";
 	}
-
+	//createContactList();
 
 }
 
@@ -107,7 +107,6 @@ function addContacts(){
 	};
 
 	var jsonPayload = JSON.stringify( tmp );
-	alert(jsonPayload);
 	var url = urlBase + '/AddContact.' + extension;
 
 	var xhr = new XMLHttpRequest();
@@ -134,3 +133,129 @@ function addContacts(){
 
 }
 
+function createContactList()
+{
+   	var userId = parseInt(localStorage.getItem("userId"));
+	var tmp = {
+                UserID:userId
+            };
+
+	var jsonPayload = JSON.stringify( tmp );
+
+	var url = urlBase + '/GetContactList.' + extension;
+	
+	var xhr = new XMLHttpRequest();
+	xhr.open("POST", url, true);
+	xhr.setRequestHeader("Content-type", "application/json; charset=UTF-8");
+	try
+	{
+		xhr.onreadystatechange = function() 
+		{
+			if (this.readyState == 4 && this.status == 200) 
+			{
+					
+				var jsonObject = JSON.parse( xhr.responseText );
+
+               			 for (var i = 0; i < jsonObject.FirstNameList.length; i++)
+              			  {
+               				 var firstNameContact = jsonObject.FirstNameList[i];
+               				 var lastNameContact = jsonObject.LastNameList[i];
+               				 var emailContact = jsonObject.EmailList[i];
+             				 var phoneNumberContact = jsonObject.PhoneList[i];
+					 
+					 addRow(firstNameContact, lastNameContact, emailContact, phoneNumberContact);
+                                  }			
+							}
+		};
+		xhr.send(jsonPayload);
+	}
+	catch(err)
+	{
+		document.getElementById("returnList").innerHTML = err.message;
+	}
+}
+
+function addRow(firstName, lastName, email, phoneNumber) {
+ 
+    var table = document.getElementById("myTableData");
+    var rowCount = table.rows.length;
+    var row = table.insertRow(rowCount);
+
+    row.insertCell(0).innerHTML= '<input type="button" value = "Delete" onClick="Javacsript:deleteRow(this)">';
+    row.insertCell(1).innerHTML= firstName;    
+    row.insertCell(2).innerHTML= lastName; 
+    row.insertCell(3).innerHTML= email;
+    row.insertCell(4).innerHTML= phoneNumber;
+    row.insertCell(5).innerHTML= '<button onClick="update()">Edit</button>';    
+}
+ 
+function deleteRow(obj) {
+      
+    var index = obj.parentNode.parentNode.rowIndex;
+    var table = document.getElementById("myTableData");
+    table.deleteRow(index);
+    
+}
+
+function update()
+{
+	alert("Hi");
+}
+
+
+function search()
+{
+    var Search = document.getElementById("Search").value;
+    var userId = parseInt(localStorage.getItem("userId"));
+	
+	var tmp = { Search:Search,
+                UserID:userId
+            };
+	var jsonPayload = JSON.stringify( tmp );
+
+	var url = urlBase + '/SearchContact.' + extension;
+	
+	var xhr = new XMLHttpRequest();
+	xhr.open("POST", url, true);
+	xhr.setRequestHeader("Content-type", "application/json; charset=UTF-8");
+	try
+	{
+		xhr.onreadystatechange = function() 
+		{
+			if (this.readyState == 4 && this.status == 200) 
+			{
+								
+              			  var jsonObject = JSON.parse( xhr.responseText );
+               			 var table = document.getElementById("myTableData");
+     
+               			 var rowCount = table.rows.length;
+               			 var row = table.insertRow(rowCount);
+				console.log(rowCount);
+        
+              			  
+              			     for (var i = rowCount-1; i >= 0; i--)
+               				 {
+                 		   table.deleteRow(i);
+               				 }          
+               var jsonObject = JSON.parse( xhr.responseText );
+
+               			 for (var i = 0; i < jsonObject.FirstNameList.length; i++)
+              			  {
+               				 var firstNameContact = jsonObject.FirstNameList[i];
+               				 var lastNameContact = jsonObject.LastNameList[i];
+               				 var emailContact = jsonObject.EmailList[i];
+             				 var phoneNumberContact = jsonObject.PhoneList[i];
+					 
+					 addRow(firstNameContact, lastNameContact, emailContact, phoneNumberContact);
+                                  }	
+				
+			}
+		};
+		xhr.send(jsonPayload);
+	}
+	catch(err)
+	{
+		document.getElementById("returnList").innerHTML = err.message;
+	}
+    
+}
