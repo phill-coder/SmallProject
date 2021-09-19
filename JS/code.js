@@ -135,47 +135,6 @@ function addContacts(){
 
 }
 
-function createContactList()
-{
-   	var userId = parseInt(localStorage.getItem("userId"));
-	var tmp = {
-                UserID:userId
-            };
-
-	var jsonPayload = JSON.stringify( tmp );
-
-	var url = urlBase + '/GetContactList.' + extension;
-	
-	var xhr = new XMLHttpRequest();
-	xhr.open("POST", url, true);
-	xhr.setRequestHeader("Content-type", "application/json; charset=UTF-8");
-	try
-	{
-		xhr.onreadystatechange = function() 
-		{
-			if (this.readyState == 4 && this.status == 200) 
-			{
-					
-				var jsonObject = JSON.parse( xhr.responseText );
-
-               			 for (var i = 0; i < jsonObject.FirstNameList.length; i++)
-              			  {
-               				 var firstNameContact = jsonObject.FirstNameList[i];
-               				 var lastNameContact = jsonObject.LastNameList[i];
-               				 var emailContact = jsonObject.EmailList[i];
-             				 var phoneNumberContact = jsonObject.PhoneList[i];
-					 
-					 addRow(firstNameContact, lastNameContact, phoneNumberContact, emailContact);
-                                  }			
-							}
-		};
-		xhr.send(jsonPayload);
-	}
-	catch(err)
-	{
-		document.getElementById("returnList").innerHTML = err.message;
-	}
-}
 
 function addRow(firstName, lastName, email, phoneNumber) {
  
