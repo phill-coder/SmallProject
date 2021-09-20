@@ -7,16 +7,20 @@
     	$NewLastName = $inData["NewLastName"];
     	$NewPhoneNumber= $inData["NewPhoneNumber"];
 	$NewEmail = $inData["NewEmail"];
-	$ID = $inData["ID"];
-	$UserID = $inData["UserID"];
+
+	$FirstName = $inData["FirstName"];
+   	$LastName = $inData["LastName"];
+	$PhoneNumber= $inData["PhoneNumber"];
+	$Email = $inData["Email"];
+  
 
 
 	$conn = new mysqli("localhost", "root", "cop4331Team","contactmanager");
 	if ($conn) 
 	{
 
-        $stmt = $conn->prepare("UPDATE Contacts SET FirstName = ? , LastName =?, PhoneNumber =?, Email =? WHERE UserID = ? and ID = ?");
-		$stmt->bind_param("ssssii", $NewFirstName, $NewLastName,$NewPhoneNumber,$NewEmail, $UserID, $ID);
+        $stmt = $conn->prepare("UPDATE Contacts SET FirstName = ? , LastName =?, PhoneNumber =?, Email =? WHERE FirstName = ? and LastName =? and PhoneNumber =? and Email =? ");
+		$stmt->bind_param("ssssssss", $NewFirstName, $NewLastName,$NewPhoneNumber,$NewEmail, $FirstName, $LastName,$PhoneNumber,$Email);
 		$stmt->execute();
 		$stmt->close();
 		$conn->close();
